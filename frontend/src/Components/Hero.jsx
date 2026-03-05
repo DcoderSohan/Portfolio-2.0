@@ -1,23 +1,14 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const SymmetricHero = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
 
-  // Parallax for the "Faded" Image
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const strokeX = useTransform(scrollYProgress, [0, 1], ["0%", "5%"]);
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative min-h-screen w-full bg-[#050505] flex items-center justify-center overflow-hidden"
+    <section
+      className="relative min-h-[100vh] w-full bg-[#050505] flex items-center justify-center overflow-hidden"
     >
-      {/* 1. LEFT SIDE: MINIMALISM */}
+      {/* 1. LEFT SIDE DECOR */}
       <div className="absolute left-0 w-1/2 h-full hidden lg:block border-r border-white/5">
         <div className="absolute bottom-12 left-12">
           <p className="text-white/20 font-mono text-[10px] uppercase tracking-[0.5em] [writing-mode:vertical-lr] rotate-180">
@@ -27,75 +18,85 @@ const SymmetricHero = () => {
       </div>
 
       {/* 2. RIGHT SIDE: THE FADED PORTRAIT */}
-      <div className="absolute -right-24 md:right-0 w-full lg:w-1/2 h-full overflow-hidden">
-        <motion.div 
-          style={{ y: imageY }}
+      <div className="absolute inset-0 lg:left-1/2 lg:right-0 overflow-hidden pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          style={{ willChange: "transform, opacity" }}
           className="relative w-full h-full"
         >
-          {/* Faded Effect Layer (Gradient Mask) */}
+          {/* Responsive Gradients */}
           <div className="absolute inset-0 z-10 
-            bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent 
-            lg:bg-gradient-to-r lg:from-[#050505] lg:to-transparent" 
+            bg-gradient-to-t from-[#050505] via-transparent to-[#050505]
+            lg:bg-gradient-to-r lg:from-[#050505] lg:via-[#050505]/20 lg:to-transparent"
           />
-          
-          <img 
-            src="/Me2.jpg" 
+          <img
+            src="/Me2.jpg"
             alt="Sohan Sarang"
-            className="w-full h-full object-cover grayscale opacity-40 contrast-125 mix-blend-luminosity"
+            loading="eager"
+            className="w-full h-full object-cover object-center lg:object-[50%_20%] grayscale opacity-40 lg:opacity-60 contrast-125"
           />
         </motion.div>
       </div>
 
-      {/* 3. CENTERED CONTENT: LARGE STROKE UI */}
-      <div className="relative z-20 text-center px-4">
+      {/* 3. CENTERED CONTENT */}
+      <div className="relative z-20 text-center px-4 pointer-events-none">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center"
         >
-          {/* Massive Stroke Text Behind */}
-          <motion.h2 
-            style={{ x: strokeX }}
-            className="absolute -top-16 lg:-top-24 text-[20vw] font-black text-transparent stroke-text opacity-20 whitespace-nowrap select-none"
+          {/* Poppins Stroke Text */}
+          <motion.h2
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+            className="absolute -top-12 lg:-top-24 text-[22vw] font-black text-transparent stroke-text opacity-10 whitespace-nowrap select-none italic"
           >
             MERN CORE
           </motion.h2>
 
-          {/* Primary Centered Heading */}
-          <h1 className="text-[15vw] lg:text-[10vw] font-black text-white leading-none tracking-tighter uppercase relative">
+          {/* Poppins Main Title */}
+          <h1 className="text-[18vw] lg:text-[11vw] font-[900] text-white leading-[0.8] tracking-[-0.05em] uppercase relative">
             WEB<br />
             <span className="text-blue-600">DEVELOPER</span>
           </h1>
 
-          {/* Tagline */}
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <div className="h-12 w-[1px] bg-gradient-to-b from-blue-600 to-transparent" />
-            <p className="text-neutral-500 font-mono text-xs md:text-sm tracking-[0.4em] uppercase">
-              OPEN TO <span className="text-white">WORK</span>
-            </p>
+          <div className="mt-12 flex flex-col items-center gap-4">
+            <div className="h-16 w-[1px] bg-gradient-to-b from-blue-600 to-transparent" />
+            <div className="flex items-center gap-3">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              <p className="text-neutral-500 font-mono text-[10px] tracking-[0.4em] uppercase">
+                System Status: <span className="text-white font-bold">Active & Hiring</span>
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>
 
-      {/* 4. BOTTOM ACTION */}
-      <div className="absolute bottom-12 flex flex-col items-center gap-4">
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-5 h-8 border border-white/20 rounded-full flex justify-center p-1"
+      {/* 4. SCROLL INDICATOR - Anchored to Viewport Bottom */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2">
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-6 h-10 border border-white/20 rounded-full flex justify-center p-1 backdrop-blur-sm"
         >
-          <div className="w-1 h-2 bg-blue-600 rounded-full" />
+          <div className="w-1 h-2 bg-blue-500 rounded-full" />
         </motion.div>
-        <span className="text-white/20 font-mono text-[8px] uppercase tracking-widest">Scroll</span>
+        <span className="text-white/20 font-mono text-[8px] uppercase tracking-[0.3em]">
+          Scroll
+        </span>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .stroke-text {
-          -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5);
+          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
         }
-        @media (max-width: 1024px) {
-          .stroke-text { -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3); }
+        @media (min-width: 1024px) {
+          .stroke-text { -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5); }
         }
       `}</style>
     </section>

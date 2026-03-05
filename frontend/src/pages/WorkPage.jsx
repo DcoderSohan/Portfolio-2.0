@@ -1,32 +1,27 @@
-import React,{useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { backendUrl } from '../config';
 
 const WorkPage = () => {
-  const projects = [
-    {
-      id: "01",
-      title: "Vortex AI",
-      category: "SaaS // Machine Learning",
-      description: "A full-stack dashboard for monitoring neural network latency in real-time.",
-      stack: ["React", "Node.js", "MongoDB", "Tailwind"],
-      color: "from-blue-600/20",
-      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1600"
-    },
-    {
-      id: "02",
-      title: "Nebula Pay",
-      category: "Fintech // Blockchain",
-      description: "Decentralized payment gateway with multi-signature wallet support.",
-      stack: ["Next.js", "Express", "PostgreSQL", "Solidity"],
-      color: "from-indigo-600/20",
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=1600"
-    }
-  ];
-
+  const navigate = useNavigate();
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`${backendUrl}/api/project/list`);
+        const data = await response.json();
+        if (data.success) {
+          setProjects(data.projects);
+        }
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+    fetchProjects();
   }, []);
 
   return (
@@ -41,7 +36,7 @@ const WorkPage = () => {
         >
           <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.8em]">Archive // 2024-2026</span>
           <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-[0.8]">
-            SELECTED <br /> <span className="text-transparent stroke-white">WORKS.</span>
+            SELECTED <br /> <span className="text-transparent stroke-white italic">WORKS.</span>
           </h1>
         </motion.div>
       </header>
@@ -50,7 +45,7 @@ const WorkPage = () => {
       <section className="max-w-7xl mx-auto space-y-64">
         {projects.map((project, index) => (
           <motion.div
-            key={project.id}
+            key={project._id}
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -59,7 +54,7 @@ const WorkPage = () => {
           >
             {/* LARGE INDEX NUMBER */}
             <span className="absolute -top-20 -left-10 text-[15vw] font-black text-white/5 select-none pointer-events-none group-hover:text-blue-600/10 transition-colors">
-              {project.id}
+              {String(index + 1).padStart(2, '0')}
             </span>
 
             {/* PROJECT IMAGE BOX */}
@@ -71,13 +66,13 @@ const WorkPage = () => {
                 alt={project.title}
                 className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"
               />
-              <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} to-transparent opacity-60`} />
+              <div className={`absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent opacity-60`} />
             </div>
 
             {/* PROJECT DETAILS */}
             <div className="lg:col-span-5 space-y-8 relative z-10">
               <div className="space-y-2">
-                <p className="text-blue-500 font-mono text-xs uppercase tracking-widest">{project.category}</p>
+                <p className="text-blue-500 font-mono text-xs uppercase tracking-widest">{project.tags.join(' // ')}</p>
                 <h3 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none">{project.title}</h3>
               </div>
 
@@ -87,7 +82,7 @@ const WorkPage = () => {
 
               {/* TECH STACK CHIPS */}
               <div className="flex flex-wrap gap-3">
-                {project.stack.map(tech => (
+                {project.tags.map(tech => (
                   <span key={tech} className="px-3 py-1 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-wider text-neutral-500">
                     {tech}
                   </span>
@@ -96,11 +91,8 @@ const WorkPage = () => {
 
               {/* ACTIONS */}
               <div className="flex gap-6 pt-4">
-                <a href="#" className="flex items-center gap-2 text-white font-bold hover:text-blue-500 transition-colors group/link">
+                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white font-bold hover:text-blue-500 transition-colors group/link">
                   View Project <ExternalLink size={18} className="group-hover/link:-translate-y-1 transition-transform" />
-                </a>
-                <a href="#" className="flex items-center gap-2 text-neutral-500 hover:text-white transition-colors">
-                  Source <Github size={18} />
                 </a>
               </div>
             </div>
@@ -124,15 +116,15 @@ const WorkPage = () => {
           </motion.p>
 
           <h2 className="text-6xl md:text-[10vw] font-black tracking-tighter leading-none uppercase mb-20">
-            HAVE A SYSTEM <br />
+            HAVE A PROJECT <br />
             <span className="text-transparent stroke-white italic">IN MIND?</span>
           </h2>
 
-          {/* THE MODERN MAGNETIC BUTTON */}
           <motion.button
             whileHover="hover"
             initial="initial"
-            className="relative group flex items-center justify-center p-20"
+            onClick={() => navigate('/contact')}
+            className="relative group flex items-center justify-center p-20 cursor-pointer"
           >
             {/* The Outer Animated Ring */}
             <motion.div
@@ -150,14 +142,16 @@ const WorkPage = () => {
               }}
               className="relative w-44 h-44 bg-white text-black rounded-full flex flex-col items-center justify-center transition-colors duration-500 group-hover:bg-blue-600 group-hover:text-white"
             >
-              <span className="text-[10px] font-black tracking-[0.3em] uppercase mb-1">Start</span>
+              <span className="text-[10px] font-black tracking-[0.3em] uppercase mb-1" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                Start
+              </span>
               <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform duration-500" />
 
               {/* Spinning Circular Text (Visible on Hover) */}
-              <div className="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <svg viewBox="0 0 100 100" className="w-full h-full scale-110">
                   <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
-                  <text className="text-[7.5px] fill-white font-black uppercase tracking-[0.2em]">
+                  <text className="text-[7.5px] fill-white font-black uppercase tracking-[0.2em]" style={{ fontFamily: "'Poppins', sans-serif" }}>
                     <textPath href="#circlePath">
                       • LET'S BUILD SOMETHING • LET'S BUILD SOMETHING
                     </textPath>
@@ -169,7 +163,7 @@ const WorkPage = () => {
         </div>
       </footer>
 
-      <style jsx>{`
+      <style>{`
         .stroke-white {
           -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.2);
         }

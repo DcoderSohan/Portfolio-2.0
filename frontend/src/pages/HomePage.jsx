@@ -3,7 +3,7 @@ import Navbar from './../Components/Navbar'
 import Hero from './../Components/Hero'
 import About from './../Components/About'
 import Work from './../Components/Work'
-import Testimonials from './../Components/Testimonials'
+import SDLC from './../Components/SDLC'
 import Footer from './../Components/Footer'
 
 function App() {
@@ -11,12 +11,12 @@ function App() {
 
   return (
     <>
-    <div>
-      <Hero id="home"/>
-      <About id="about"/>
-      <Work id="work"/>
-      <Testimonials id="contact"/>
-    </div>
+      <div>
+        <Hero id="home" />
+        <About id="about" />
+        <Work id="work" />
+        <SDLC id="contact" />
+      </div>
     </>
   )
 }

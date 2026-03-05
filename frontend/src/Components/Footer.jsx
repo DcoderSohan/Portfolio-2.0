@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 const DeepSpaceFooter = () => {
   return (
     <footer className="relative min-h-screen bg-[#020202] flex flex-col justify-end px-6 lg:pl-40 pb-12 overflow-hidden" id='contact'>
-      
+
       {/* 1. THE DISTANT WATERMARK (Parallax Effect) */}
-      <motion.div 
+      <motion.div
         initial={{ y: -100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 0.05 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -18,23 +18,31 @@ const DeepSpaceFooter = () => {
       </motion.div>
 
       {/* 2. THE FLOATING CONTACT HUB */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center text-center mb-32">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center text-center mb-32 px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
           className="space-y-4"
         >
-          <span className="text-blue-500 font-mono text-xs uppercase tracking-[1em]">Available Globally</span>
-          <a 
-            href="mailto:hi@sohan.dev" 
+          <span className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.6em] md:tracking-[1em]">
+            Available Globally
+          </span>
+
+          <a
+            href="mailto:sohan@sarang.dev"
             className="group relative inline-block py-4"
           >
-            <h2 className="text-4xl md:text-7xl font-light text-white transition-all duration-500 group-hover:tracking-[0.1em]">
-              sohan<span className="text-blue-600 font-black">@</span>sarang.dev
+            {/* - text-[6.5vw] scales the font to the phone width 
+          - hover:tracking-normal keeps it from expanding too far 
+      */}
+            <h2 className="text-[6.5vw] md:text-6xl lg:text-7xl font-[300] text-white transition-all duration-500 tracking-tighter group-hover:tracking-normal"
+              style={{ fontFamily: "'Poppins', sans-serif" }}>
+              sohan<span className="text-blue-600 font-[900]">@</span>sarang.dev
             </h2>
+
             {/* The Liquid Underline */}
-            <motion.div 
+            <motion.div
               className="absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent w-full scale-x-0 group-hover:scale-x-100 transition-transform duration-700"
             />
           </a>
@@ -44,7 +52,7 @@ const DeepSpaceFooter = () => {
       {/* 3. THE UTILITY DOCK (Footer Navigation) */}
       <div className="relative z-10 w-full max-w-7xl mx-auto border-t border-white/5 pt-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-end">
-          
+
           {/* Brand Info */}
           <div className="md:col-span-4 space-y-4">
             <h3 className="text-white font-black text-xl tracking-tighter uppercase">Sohan Sarang</h3>
@@ -56,9 +64,9 @@ const DeepSpaceFooter = () => {
           {/* Social Links with Custom Hover */}
           <div className="md:col-span-4 flex gap-6 md:justify-center">
             {['LinkedIn', 'Github', 'Twitter'].map((social) => (
-              <a 
-                key={social} 
-                href="#" 
+              <a
+                key={social}
+                href="#"
                 className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest hover:text-white transition-all border-b border-transparent hover:border-blue-600 pb-1"
               >
                 {social}

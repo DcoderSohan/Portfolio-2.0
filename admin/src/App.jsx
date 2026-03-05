@@ -1,16 +1,43 @@
-import { useState } from 'react'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AdminLayout from './layout/AdminLayout';
+import Dashboard from './pages/Dashboard';
+import Projects from './pages/Projects';
+import Messages from './pages/Messages';
+import AddProject from './pages/AddProject';
+import EditProject from './pages/EditProject';
+import Login from './pages/Login';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }
+  }, [token]);
 
   return (
-    <>
-    <div>
-      <h1 className='bg-red-600 text-center text-white'>Hello World</h1>
-    </div>
-    </>
-  )
-}
+    <BrowserRouter>
+      <div className='bg-[#050505] min-h-screen font-sans text-white'>
+        {!token ? (
+          <Login setToken={setToken} />
+        ) : (
+          <Routes>
+            <Route path="/" element={<AdminLayout setToken={setToken} />}>
+              <Route index element={<Dashboard />} />
+              <Route path="projects" element={<Projects />} />
+              <Route path="projects/add" element={<AddProject />} />
+              <Route path="projects/edit/:id" element={<EditProject />} />
+              <Route path="messages" element={<Messages />} />
+            </Route>
+          </Routes>
+        )}
+      </div>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;

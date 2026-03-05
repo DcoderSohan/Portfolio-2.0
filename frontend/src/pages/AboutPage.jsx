@@ -16,7 +16,7 @@ const AboutPage = () => {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white pt-32 pb-20 px-6 lg:pl-40 overflow-hidden">
-      
+
       {/* 1. TYPOGRAPHIC HERO */}
       <section className="max-w-7xl mx-auto mb-32">
         <motion.div
@@ -28,24 +28,27 @@ const AboutPage = () => {
           <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.6em] block mb-6">
             Introduction // 01
           </span>
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] uppercase mb-12">
-            Architecting <br /> 
-            <span className="text-transparent stroke-white">Digital Systems.</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-[900] tracking-tighter leading-[1.1] lg:leading-[0.9] uppercase mb-12"
+            style={{ fontFamily: "'Poppins', sans-serif" }}>
+            Architecting <br className="hidden md:block" />
+            <span className="text-transparent stroke-white inline-block mt-2 md:mt-0 italic">
+              Digital Systems.
+            </span>
           </h1>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
             <p className="text-neutral-400 text-xl md:text-2xl font-light leading-relaxed">
-              I'm a Full-Stack Engineer specializing in high-performance web applications. 
-              I bridge the gap between <span className="text-white italic">complex backend logic</span> and 
+              I'm a Full-Stack Engineer specializing in high-performance web applications.
+              I bridge the gap between <span className="text-white italic">complex backend logic</span> and
               <span className="text-white italic"> fluid user interfaces</span>.
             </p>
             <div className="flex gap-4">
-               <div className="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center animate-bounce">
-                  <Zap size={20} className="text-blue-500 fill-blue-500" />
-               </div>
-               <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest leading-loose">
-                 Currently building <br /> scalable MERN ecosystems.
-               </p>
+              <div className="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center animate-bounce">
+                <Zap size={20} className="text-blue-500 fill-blue-500" />
+              </div>
+              <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest leading-loose">
+                Currently building <br /> scalable MERN ecosystems.
+              </p>
             </div>
           </div>
         </motion.div>
@@ -72,7 +75,7 @@ const AboutPage = () => {
         ))}
 
         {/* LARGE BENTO BOX: EXPERIENCE */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="md:col-span-2 p-10 bg-neutral-900/40 border border-white/5 rounded-3xl flex flex-col justify-between"
@@ -117,7 +120,7 @@ const AboutPage = () => {
         </motion.button>
       </section>
 
-      <style jsx>{`
+      <style>{`
         .stroke-white {
           -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
         }

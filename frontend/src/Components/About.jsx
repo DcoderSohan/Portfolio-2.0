@@ -7,21 +7,21 @@ const SideAnchoredAbout = () => {
 
   const slideFromLeft = {
     initial: { opacity: 0, x: -100 },
-    whileInView: { 
-      opacity: 1, 
-      x: 0, 
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } 
+    whileInView: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
   return (
-    <section className="relative min-h-screen bg-[#050505] flex items-center py-24 pl-20 lg:pl-32 pr-6 lg:pr-24 overflow-hidden" id='about'>
-      
+    <section className="relative min-h-screen bg-[#050505] flex items-center py-16 pl-20 lg:pl-32 pr-6 lg:pr-24 overflow-hidden" id='about'>
+
       {/* 1. KINETIC BACKGROUND LINE */}
       <div className="absolute left-0 top-0 w-[1px] h-full bg-gradient-to-b from-transparent via-blue-600/50 to-transparent" />
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-10 gap-16 relative z-10">
-        
+
         {/* LEFT COLUMN */}
         <div className="lg:col-span-4 flex flex-col justify-center">
           <motion.div {...slideFromLeft}>
@@ -29,7 +29,7 @@ const SideAnchoredAbout = () => {
               <div className="h-[1px] w-12 bg-blue-600" />
               <span className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.6em]">Profile</span>
             </div>
-            
+
             <h2 className="text-white text-7xl lg:text-9xl font-black leading-[0.8] uppercase tracking-tighter">
               SOHAN<br />
               <span className="text-transparent stroke-white italic">SARANG</span>
@@ -39,9 +39,9 @@ const SideAnchoredAbout = () => {
 
         {/* RIGHT COLUMN */}
         <div className="lg:col-span-6 flex flex-col justify-center space-y-20">
-          
+
           {/* Main Statement */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
@@ -54,7 +54,7 @@ const SideAnchoredAbout = () => {
 
           {/* Detailed Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-white/5 pt-10">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -66,7 +66,7 @@ const SideAnchoredAbout = () => {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -80,13 +80,13 @@ const SideAnchoredAbout = () => {
           </div>
 
           {/* 3. REDIRECTION BUTTON */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
             className="pt-6"
           >
-            <button 
+            <button
               onClick={() => navigate('/about')} // 3. Set the destination path here
               className="group flex items-center gap-6"
             >
@@ -106,7 +106,7 @@ const SideAnchoredAbout = () => {
         </h2>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .stroke-white {
           -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
         }

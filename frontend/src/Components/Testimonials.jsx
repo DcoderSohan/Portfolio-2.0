@@ -26,7 +26,7 @@ const AwardTestimonials = () => {
   return (
     <section className="relative min-h-screen bg-[#050505] py-24 px-6 lg:px-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:items-start">
-        
+
         {/* 1. STICKY SIDEBAR (Pinned on Scroll) */}
         <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit mb-20 lg:mb-0">
           <motion.div
@@ -64,16 +64,16 @@ const AwardTestimonials = () => {
               {/* TESTIMONIAL CONTENT */}
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div className="mb-12">
-                   <span className="text-white/10 text-9xl font-black absolute -top-10 -left-6 select-none">“</span>
-                   <h3 className="text-white text-3xl md:text-5xl font-light leading-tight tracking-tight relative z-10">
-                     {item.text}
-                   </h3>
+                  <span className="text-white/10 text-9xl font-black absolute -top-10 -left-6 select-none">“</span>
+                  <h3 className="text-white text-3xl md:text-5xl font-light leading-tight tracking-tight relative z-10">
+                    {item.text}
+                  </h3>
                 </div>
 
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pt-10 border-t border-white/5">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-neutral-800 border border-white/10 overflow-hidden">
-                       <div className={`w-full h-full bg-gradient-to-tr ${item.color.replace('bg-', 'from-')} to-black opacity-50`} />
+                      <div className={`w-full h-full bg-gradient-to-tr ${item.color.replace('bg-', 'from-')} to-black opacity-50`} />
                     </div>
                     <div>
                       <p className="text-white font-bold text-lg leading-none">{item.client}</p>
@@ -100,7 +100,7 @@ const AwardTestimonials = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .stroke-white { -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.2); }
       `}</style>
     </section>
