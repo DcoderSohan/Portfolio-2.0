@@ -9,9 +9,9 @@ const AboutPage = () => {
   }, []);
 
   const skills = [
-    { name: "Frontend", tools: "React / Next.js / Three.js", icon: <Globe size={20} /> },
-    { name: "Backend", tools: "Node / Go / PostgreSQL", icon: <Terminal size={20} /> },
-    { name: "Infrastructure", tools: "Docker / AWS / Vercel", icon: <Cpu size={20} /> },
+    { name: "Frontend", tools: "HTML & CSS / JavaScript / React.js", icon: <Globe size={20} /> },
+    { name: "Backend", tools: "Node / Express / MongoDB", icon: <Terminal size={20} /> },
+    { name: "Tools", tools: "Git / GitHub / VS Code / Cursor / Antigravity", icon: <Cpu size={20} /> },
   ];
 
   return (
@@ -87,17 +87,17 @@ const AboutPage = () => {
           <div className="space-y-6">
             <div className="flex justify-between border-b border-white/5 pb-4">
               <div>
-                <p className="text-white font-bold uppercase">Senior Developer</p>
-                <p className="text-neutral-500 text-sm">TechFlow Systems</p>
+                <p className="text-white font-bold uppercase">MERN Stack Developer</p>
+                <p className="text-neutral-500 text-sm">Freelance</p>
               </div>
-              <p className="text-neutral-600 font-mono text-xs">2024 — PRESENT</p>
+              <p className="text-neutral-600 font-mono text-xs">Jul 2024 — PRESENT</p>
             </div>
             <div className="flex justify-between">
               <div>
-                <p className="text-white font-bold uppercase">MERN Specialist</p>
-                <p className="text-neutral-500 text-sm">Freelance // Global</p>
+                <p className="text-white font-bold uppercase">Web Developer</p>
+                <p className="text-neutral-500 text-sm">Prodigy InfoTech</p>
               </div>
-              <p className="text-neutral-600 font-mono text-xs">2022 — 2024</p>
+              <p className="text-neutral-600 font-mono text-xs">Jun 2024 — Jul 2024</p>
             </div>
           </div>
         </motion.div>
@@ -106,18 +106,6 @@ const AboutPage = () => {
         <div className="p-8 bg-blue-600 rounded-3xl flex items-center justify-center text-center italic font-serif text-2xl">
           "Simplicity is the soul of efficiency."
         </div>
-      </section>
-
-      {/* 3. CTA MINI SECTION */}
-      <section className="max-w-7xl mx-auto py-20 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-        <h2 className="text-3xl font-bold uppercase tracking-tighter">Want to see the tech behind this?</h2>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-8 py-4 bg-white text-black font-black uppercase text-xs tracking-[0.2em] rounded-full"
-        >
-          Download CV
-        </motion.button>
       </section>
 
       <style>{`

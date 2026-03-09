@@ -17,26 +17,45 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('token');
 
-        // Fetch Projects
+        // Fetch Projects (Publicly accessible)
         const projRes = await fetch(`${backendUrl}/api/project/list`);
         const projData = await projRes.json();
+        
+        let projectCount = 0;
+        if (projData.success && Array.isArray(projData.projects)) {
+          projectCount = projData.projects.length;
+        }
 
-        // Fetch Messages
+        // Fetch Messages (Protected)
         const msgRes = await fetch(`${backendUrl}/api/message/list`, {
           headers: { token }
         });
         const msgData = await msgRes.json();
+        
+        let messageCount = 0;
+        let unreadCount = 0;
 
-        if (projData.success && msgData.success) {
-          setStats({
-            projects: projData.projects.length,
-            messages: msgData.messages.length,
-            unread: msgData.messages.filter(m => {
-              // Assuming we might add a 'read' status later, for now just show total as "active"
-              return true;
-            }).length
-          });
+        if (msgData.success && Array.isArray(msgData.messages)) {
+          messageCount = msgData.messages.length;
+          // Filter by an assumed 'read' property, or show all if not defined
+          unreadCount = msgData.messages.filter(m => m.read === false).length;
+          
+          if (unreadCount === 0 && messageCount > 0 && !msgData.messages[0].hasOwnProperty('read')) {
+            // Fallback for visual impact: if no 'read' property exists, show all as new/active
+            unreadCount = messageCount;
+          }
+        } else if (msgData.message === "Not Authorized, Login Again") {
+          // If auth failed, clear token and logout
+          localStorage.removeItem('token');
+          window.location.reload();
+          return;
         }
+
+        setStats({
+          projects: projectCount,
+          messages: messageCount,
+          unread: unreadCount
+        });
       } catch (error) {
         console.error("Statistical_Capture_Error:", error);
       } finally {
@@ -50,8 +69,8 @@ const Dashboard = () => {
     <div className="space-y-12">
       <header className="flex justify-between items-end">
         <div>
-          <p className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.5em] mb-2 font-bold flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+          <p className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-[0.5em] mb-2 font-bold flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-700 animate-pulse" />
             System_Metrics
           </p>
           <h1 className="text-6xl lg:text-8xl font-black uppercase tracking-tighter italic leading-none">Overview</h1>

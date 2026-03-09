@@ -34,8 +34,8 @@ const WorkPage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.8em]">Archive // 2024-2026</span>
-          <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-[0.8]">
+          <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-xs uppercase tracking-[0.8em]">Archive // 2024-2026</span>
+          <h1 className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-[0.8]">
             SELECTED <br /> <span className="text-transparent stroke-white italic">WORKS.</span>
           </h1>
         </motion.div>
@@ -72,7 +72,7 @@ const WorkPage = () => {
             {/* PROJECT DETAILS */}
             <div className="lg:col-span-5 space-y-8 relative z-10">
               <div className="space-y-2">
-                <p className="text-blue-500 font-mono text-xs uppercase tracking-widest">{project.tags.join(' // ')}</p>
+                <p className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-xs uppercase tracking-widest">{project.tags.join(' // ')}</p>
                 <h3 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none">{project.title}</h3>
               </div>
 
@@ -110,7 +110,7 @@ const WorkPage = () => {
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-blue-500 font-mono text-xs uppercase tracking-[0.5em] mb-12"
+            className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-xs uppercase tracking-[0.5em] mb-12"
           >
             Ready for the next challenge
           </motion.p>

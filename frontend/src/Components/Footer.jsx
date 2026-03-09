@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const DeepSpaceFooter = () => {
   return (
-    <footer className="relative min-h-screen bg-[#020202] flex flex-col justify-end px-6 lg:pl-40 pb-12 overflow-hidden" id='contact'>
+    <footer className="relative bg-[#050505] flex flex-col justify-end px-6 lg:pl-40 pt-24 pb-12 overflow-hidden" id='contact'>
 
       {/* 1. THE DISTANT WATERMARK (Parallax Effect) */}
       <motion.div
@@ -25,20 +25,20 @@ const DeepSpaceFooter = () => {
           transition={{ duration: 1 }}
           className="space-y-4"
         >
-          <span className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.6em] md:tracking-[1em]">
+          <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-900 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-[0.6em] md:tracking-[1em]">
             Available Globally
           </span>
 
           <a
-            href="mailto:sohan@sarang.dev"
+            href="mailto:sohansarang05@gmail.com"
             className="group relative inline-block py-4"
           >
             {/* - text-[6.5vw] scales the font to the phone width 
           - hover:tracking-normal keeps it from expanding too far 
       */}
-            <h2 className="text-[6.5vw] md:text-6xl lg:text-7xl font-[300] text-white transition-all duration-500 tracking-tighter group-hover:tracking-normal"
+            <h2 className="text-[6.5vw] md:text-6xl lg:text-6xl font-[300] text-white transition-all duration-500 tracking-tighter group-hover:tracking-normal"
               style={{ fontFamily: "'Poppins', sans-serif" }}>
-              sohan<span className="text-blue-600 font-[900]">@</span>sarang.dev
+              sohansarang05<span className="bg-gradient-to-r from-blue-600 to-indigo-900 bg-clip-text text-transparent font-[900]">@</span>gmail.com
             </h2>
 
             {/* The Liquid Underline */}
@@ -63,13 +63,18 @@ const DeepSpaceFooter = () => {
 
           {/* Social Links with Custom Hover */}
           <div className="md:col-span-4 flex gap-6 md:justify-center">
-            {['LinkedIn', 'Github', 'Twitter'].map((social) => (
+            {[
+              { name: 'LinkedIn', url: 'https://linkedin.com/in/sohan-sarang' },
+              { name: 'Github', url: 'https://github.com/DcoderSohan' }
+            ].map((social) => (
               <a
-                key={social}
-                href="#"
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest hover:text-white transition-all border-b border-transparent hover:border-blue-600 pb-1"
               >
-                {social}
+                {social.name}
               </a>
             ))}
           </div>
@@ -77,10 +82,10 @@ const DeepSpaceFooter = () => {
           {/* Copyright & Technical Meta */}
           <div className="md:col-span-4 md:text-right space-y-2">
             <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-widest">
-              Built with React + Framer + Tailwind
+              © 2026 // All rights reserved by Sohan Sarang
             </p>
             <p className="text-white/40 font-mono text-[9px] uppercase tracking-widest">
-              © 2026 // 19.1756° N, 72.8347° E
+              Ratnagiri, Maharashtra, India
             </p>
           </div>
         </div>

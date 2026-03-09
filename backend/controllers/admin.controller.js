@@ -23,4 +23,8 @@ const adminLogin = async (req, res) => {
     }
 };
 
-export { adminLogin };
+const verifyAdmin = async (req, res) => {
+    res.json({ success: true, message: "Authorized" });
+};
+
+export { adminLogin, verifyAdmin };

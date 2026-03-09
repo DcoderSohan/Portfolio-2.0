@@ -7,7 +7,7 @@ const Services = ({ id }) => {
         {
             title: "Web Development",
             description: "Building high-performance, pixel-perfect web applications using the MERN stack. Focused on speed, SEO, and ultimate user experience.",
-            icon: <Globe className="text-blue-500" size={32} />,
+            icon: <Globe className="text-blue-500" size={32} />, // Icon color is handled via Tailwind in the JSX render bit below
             quote: "Architecture that scales with your ambition."
         },
         {
@@ -25,7 +25,7 @@ const Services = ({ id }) => {
         {
             title: "App Development",
             description: "Creating cross-platform mobile solutions that feel native. Bridging the gap between web and mobile seamlessly.",
-            icon: <Smartphone className="text-blue-500" size={32} />,
+            icon: <Smartphone className="text-blue-500" size={32} />, // Icon color is handled via Tailwind in the JSX render bit below
             quote: "Innovation in the palm of your hand."
         }
     ];
@@ -44,11 +44,11 @@ const Services = ({ id }) => {
                         viewport={{ once: true }}
                         className="flex items-center justify-center gap-4 mb-6"
                     >
-                        <div className="h-[1px] w-12 bg-blue-600/30" />
-                        <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.6em]">
+                        <div className="h-[1px] w-12 bg-gradient-to-r from-blue-600 to-indigo-900 opacity-30" />
+                        <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-xs uppercase tracking-[0.6em]">
                             System_Offerings // 04
                         </span>
-                        <div className="h-[1px] w-12 bg-blue-600/30" />
+                        <div className="h-[1px] w-12 bg-gradient-to-r from-blue-600 to-indigo-900 opacity-30" />
                     </motion.div>
                     <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic leading-none">
                         MY <span className="text-transparent stroke-white">SERVICES.</span>
@@ -68,12 +68,12 @@ const Services = ({ id }) => {
                         >
                             {/* Icon & Label */}
                             <div className="flex justify-between items-start mb-12">
-                                <div className="p-5 rounded-2xl bg-white/5 text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-xl">
+                                <div className="p-5 rounded-2xl bg-white/5 bg-gradient-to-br group-hover:from-blue-600 group-hover:to-indigo-900 text-blue-500 group-hover:text-white transition-all duration-500 shadow-xl">
                                     {service.icon}
                                 </div>
                                 <div className="text-right">
                                     <p className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest font-bold">Standard_Protocol</p>
-                                    <p className="text-[10px] font-mono text-blue-500 uppercase tracking-widest leading-none mt-1">S-0{index + 1}</p>
+                                    <p className="text-[10px] font-mono bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent uppercase tracking-widest leading-none mt-1">S-0{index + 1}</p>
                                 </div>
                             </div>
 
@@ -89,7 +89,7 @@ const Services = ({ id }) => {
 
                             {/* Testimonial-style 'Quote' footer */}
                             <div className="mt-12 pt-8 border-t border-white/5 flex items-center gap-4">
-                                <div className="w-8 h-[1px] bg-blue-600" />
+                                <div className="w-8 h-[1px] bg-gradient-to-r from-blue-600 to-indigo-900" />
                                 <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 italic">
                                     "{service.quote}"
                                 </p>

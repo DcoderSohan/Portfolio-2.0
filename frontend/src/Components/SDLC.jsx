@@ -16,17 +16,17 @@ const SDLC = ({ id }) => {
     ];
 
     const phases = [
-        "Discovery", "Architecture", "Engineering", "Validation", "Deployment"
+        "Analysis", "Design", "Development", "Testing", "Deployment"
     ];
 
     return (
         <section
             id={id}
             ref={containerRef}
-            className="relative bg-[#050505] py-24 overflow-hidden border-t border-white/5"
+            className="relative bg-[#050505] py-12 lg:py-24 overflow-hidden border-t border-white/5"
         >
             <div className="absolute top-0 left-0 p-8 opacity-20 pointer-events-none z-20">
-                <p className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.6em] font-bold">
+                <p className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-[0.6em] font-bold">
                     Operational_Protocol // SDLC
                 </p>
             </div>

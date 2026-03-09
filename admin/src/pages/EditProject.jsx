@@ -83,7 +83,7 @@ const EditProject = () => {
 
             if (data.success) {
                 setStatus('Record_Updated');
-                setTimeout(() => navigate('/projects'), 800);
+                navigate('/projects', { state: { successMessage: 'Project updated successfully!' } });
             } else {
                 setStatus('Update_Failed');
                 alert(data.message);

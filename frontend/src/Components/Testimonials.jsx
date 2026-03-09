@@ -35,8 +35,8 @@ const AwardTestimonials = () => {
             className="space-y-6"
           >
             <div className="flex items-center gap-3">
-              <span className="w-10 h-[1px] bg-blue-500" />
-              <p className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.6em]">Reputation</p>
+              <span className="w-10 h-[1px] bg-gradient-to-r from-blue-600 to-indigo-900" />
+              <p className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-[0.6em]">Reputation</p>
             </div>
             <h2 className="text-white text-7xl font-black leading-none uppercase tracking-tighter">
               KIND<br />WORDS<br /><span className="text-transparent stroke-white italic">ONLY.</span>
@@ -77,7 +77,7 @@ const AwardTestimonials = () => {
                     </div>
                     <div>
                       <p className="text-white font-bold text-lg leading-none">{item.client}</p>
-                      <p className="text-blue-500 font-mono text-[10px] uppercase tracking-widest mt-1">{item.role}</p>
+                      <p className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-900 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-widest mt-1">{item.role}</p>
                     </div>
                   </div>
 

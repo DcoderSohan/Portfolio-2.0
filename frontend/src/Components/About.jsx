@@ -15,10 +15,10 @@ const SideAnchoredAbout = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-[#050505] flex items-center py-16 pl-20 lg:pl-32 pr-6 lg:pr-24 overflow-hidden" id='about'>
+    <section className="relative min-h-screen bg-[#050505] flex items-center py-16 px-6 lg:pl-32 lg:pr-24 overflow-hidden" id='about'>
 
       {/* 1. KINETIC BACKGROUND LINE */}
-      <div className="absolute left-0 top-0 w-[1px] h-full bg-gradient-to-b from-transparent via-blue-600/50 to-transparent" />
+      <div className="absolute left-0 top-0 w-[1px] h-full bg-gradient-to-b from-blue-600 to-slate-950" />
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-10 gap-16 relative z-10">
 
@@ -26,11 +26,11 @@ const SideAnchoredAbout = () => {
         <div className="lg:col-span-4 flex flex-col justify-center">
           <motion.div {...slideFromLeft}>
             <div className="flex items-center gap-4 mb-6">
-              <div className="h-[1px] w-12 bg-blue-600" />
-              <span className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.6em]">Profile</span>
+              <div className="h-[1px] w-12 bg-gradient-to-r from-blue-600 to-indigo-900" />
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-[0.6em]">Profile</span>
             </div>
 
-            <h2 className="text-white text-7xl lg:text-9xl font-black leading-[0.8] uppercase tracking-tighter">
+            <h2 className="text-white text-6xl lg:text-9xl font-black leading-[0.8] uppercase tracking-tighter">
               SOHAN<br />
               <span className="text-transparent stroke-white italic">SARANG</span>
             </h2>
@@ -48,7 +48,7 @@ const SideAnchoredAbout = () => {
             className="relative"
           >
             <h3 className="text-white text-3xl lg:text-5xl font-light leading-tight">
-              A <span className="text-blue-600 italic">MERN Architect</span> designing systems that transform raw data into seamless human experiences.
+              A <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent italic font-bold">MERN Architect</span> designing systems that transform raw data into seamless human experiences.
             </h3>
           </motion.div>
 
@@ -60,7 +60,7 @@ const SideAnchoredAbout = () => {
               transition={{ delay: 0.4 }}
               className="space-y-4"
             >
-              <h4 className="text-[10px] font-mono text-blue-500 uppercase tracking-widest">Technicals</h4>
+              <h4 className="text-[10px] font-mono bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent uppercase tracking-widest">Technicals</h4>
               <p className="text-neutral-500 text-sm font-light leading-relaxed">
                 Specializing in <span className="text-white">Node.js</span> high-concurrency architecture and <span className="text-white">React</span> micro-interactions.
               </p>
@@ -72,7 +72,7 @@ const SideAnchoredAbout = () => {
               transition={{ delay: 0.5 }}
               className="space-y-4"
             >
-              <h4 className="text-[10px] font-mono text-blue-500 uppercase tracking-widest">Philosophy</h4>
+              <h4 className="text-[10px] font-mono bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent uppercase tracking-widest">Philosophy</h4>
               <p className="text-neutral-500 text-sm font-light leading-relaxed">
                 Code should be as <span className="text-white italic">elegant</span> as it is functional. I build for scalability and performance.
               </p>

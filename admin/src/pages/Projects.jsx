@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
-import ConfirmDeleteModal from '../components/ConfirmDeleteModal'
 import { backendUrl } from '../config';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -11,6 +10,7 @@ const Projects = () => {
   const [deletingId, setDeletingId] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Fetch projects from backend
   const fetchProjects = async () => {
@@ -46,6 +46,8 @@ const Projects = () => {
       if (data.success) {
         setProjects(prev => prev.filter(p => p._id !== id));
         setConfirmDeleteId(null);
+        // Show toast via location state trick — we re-navigate with success state
+        navigate(location.pathname, { replace: true, state: { successMessage: 'Project deleted successfully!' } });
       } else {
         alert(data.message);
       }

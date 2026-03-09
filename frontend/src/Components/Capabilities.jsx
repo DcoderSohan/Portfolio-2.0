@@ -15,7 +15,7 @@ const Capabilities = ({ id }) => {
 
                 {/* Visual Label */}
                 <div className="space-y-4">
-                    <p className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.5em] font-bold">Capabilities // 04</p>
+                    <p className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-[0.5em] font-bold">Capabilities // 04</p>
                     <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">Focus.</h2>
                 </div>
 

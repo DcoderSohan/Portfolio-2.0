@@ -41,7 +41,7 @@ const SymmetricHero = () => {
       </div>
 
       {/* 3. CENTERED CONTENT */}
-      <div className="relative z-20 text-center px-4 pointer-events-none">
+      <div className="relative z-20 text-center px-8 lg:px-4 pointer-events-none w-full max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,15 +51,15 @@ const SymmetricHero = () => {
           {/* Poppins Stroke Text */}
           <motion.h2
             style={{ fontFamily: "'Poppins', sans-serif" }}
-            className="absolute -top-12 lg:-top-24 text-[22vw] font-black text-transparent stroke-text opacity-10 whitespace-nowrap select-none italic"
+            className="absolute -top-10 lg:-top-24 left-1/2 -translate-x-1/2 text-[20vw] lg:text-[22vw] font-black text-transparent stroke-text opacity-10 whitespace-nowrap select-none italic"
           >
             MERN CORE
           </motion.h2>
 
           {/* Poppins Main Title */}
-          <h1 className="text-[18vw] lg:text-[11vw] font-[900] text-white leading-[0.8] tracking-[-0.05em] uppercase relative">
-            WEB<br />
-            <span className="text-blue-600">DEVELOPER</span>
+          <h1 className="text-[13vw] lg:text-[11vw] font-[900] text-white text-center leading-[0.8] tracking-[-0.05em] uppercase relative">
+            <span className="text-white">WEB</span><br />
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent stroke-white-low">DEVELOPER</span>
           </h1>
 
           <div className="mt-12 flex flex-col items-center gap-4">
@@ -70,7 +70,7 @@ const SymmetricHero = () => {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
               <p className="text-neutral-500 font-mono text-[10px] tracking-[0.4em] uppercase">
-                System Status: <span className="text-white font-bold">Active & Hiring</span>
+                <span className="text-white font-bold">Scroll</span>
               </p>
             </div>
           </div>
@@ -97,6 +97,12 @@ const SymmetricHero = () => {
         }
         @media (min-width: 1024px) {
           .stroke-text { -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5); }
+        }
+        .stroke-blue-theme {
+          -webkit-text-stroke: 1px #2563eb;
+        }
+        .stroke-white-low {
+          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
         }
       `}</style>
     </section>

@@ -14,7 +14,7 @@ const Sidebar = ({ setToken }) => {
         <aside className="hidden lg:flex w-72 border-r border-white/5 bg-[#080808] flex-col p-8 fixed h-full z-50">
             <div className="mb-12 px-2">
                 <h2 className="text-2xl font-[900] italic tracking-tighter uppercase text-white">
-                    Sohan<span className="text-blue-600">.</span>DB
+                    Sohan<span className="bg-gradient-to-r from-blue-600 to-indigo-900 bg-clip-text text-transparent">.</span>Sarang
                 </h2>
             </div>
 
@@ -34,7 +34,7 @@ const Sidebar = ({ setToken }) => {
                                 {isActive && (
                                     <motion.div
                                         layoutId="sidebar-active"
-                                        className="absolute inset-0 bg-blue-600 rounded-2xl -z-10 shadow-lg shadow-blue-600/20"
+                                        className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-700 to-indigo-950 rounded-2xl -z-10 shadow-lg shadow-blue-600/20"
                                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                     />
                                 )}

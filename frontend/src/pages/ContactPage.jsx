@@ -76,15 +76,15 @@ const ContactPage = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.6em] block">
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-xs uppercase tracking-[0.6em] block">
                 Transmission // 03
               </span>
               <div className="flex items-center gap-2 bg-blue-600/10 border border-blue-600/20 px-3 py-1 rounded-full">
                 <div className={`w-1.5 h-1.5 rounded-full ${loading ? 'bg-blue-500 animate-pulse' : 'bg-green-500'}`} />
-                <span className="text-[8px] font-mono uppercase tracking-widest text-blue-400">{status}</span>
+                <span className="text-[8px] font-mono uppercase tracking-widest bg-gradient-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent">{status}</span>
               </div>
             </div>
-            <h1 className="text-7xl md:text-8xl font-black tracking-tighter leading-[0.8] uppercase mb-8">
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.8] uppercase mb-8">
               START A <br />
               <span className="text-transparent stroke-white italic">PROJECT.</span>
             </h1>
@@ -214,7 +214,7 @@ const ContactPage = () => {
               disabled={loading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-blue-600 hover:bg-white hover:text-black py-6 rounded-2xl flex items-center justify-center gap-4 text-xs font-black uppercase tracking-[0.5em] transition-all duration-500 group shadow-[0_0_30px_rgba(37,99,235,0.2)] disabled:bg-neutral-800 disabled:text-neutral-500"
+              className="w-full bg-gradient-to-r from-blue-600 via-indigo-700 to-indigo-950 hover:from-white hover:to-white hover:text-black py-6 rounded-2xl flex items-center justify-center gap-4 text-xs font-black uppercase tracking-[0.5em] transition-all duration-500 group shadow-[0_0_30px_rgba(37,99,235,0.2)] disabled:bg-neutral-800 disabled:text-neutral-500"
             >
               {loading ? 'Transmitting...' : 'Initiate Contact'}
               <Send size={16} className={`group-hover:translate-x-2 group-hover:-translate-y-1 transition-transform ${loading ? 'opacity-0' : ''}`} />

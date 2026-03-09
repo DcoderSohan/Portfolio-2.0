@@ -13,7 +13,9 @@ const WorkPerspective = () => {
         const response = await fetch(`${backendUrl}/api/project/list`);
         const data = await response.json();
         if (data.success) {
-          setProjects(data.projects);
+          // Sort by latest and take top 3
+          const sorted = data.projects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 3);
+          setProjects(sorted);
         }
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -39,7 +41,7 @@ const WorkPerspective = () => {
             whileInView={{ opacity: 1, x: 0 }}
             className="text-white text-xs font-mono tracking-[0.8em] uppercase mb-4 flex items-center gap-4"
           >
-            <span className="w-8 h-[1px] bg-blue-600" /> Selected Cases
+            <span className="w-8 h-[1px] bg-gradient-to-r from-blue-600 to-indigo-900" /> Selected Cases
           </motion.h2>
         </div>
 
@@ -54,7 +56,7 @@ const WorkPerspective = () => {
               onClick={() => window.open(proj.liveLink, '_blank')} // Open live link
               className="group relative perspective-1000 cursor-pointer"
             >
-              <div className="relative py-10 border-b border-white/5 flex flex-col md:flex-row justify-between items-center transition-[padding,background-color] duration-700 ease-out group-hover:pl-8 group-hover:bg-white/[0.02]">
+              <div className="relative py-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-center transition-[padding,background-color] duration-700 ease-out group-hover:pl-8 group-hover:bg-white/[0.02]">
 
                 {/* PROJECT NAME */}
                 <div className="relative z-20 overflow-hidden">
@@ -65,7 +67,7 @@ const WorkPerspective = () => {
 
                 {/* PROJECT DATA */}
                 <div className="relative z-20 text-right mt-4 md:mt-0 opacity-40 group-hover:opacity-100 transition-all">
-                  <p className="text-blue-500 font-mono text-[10px] uppercase tracking-widest">{proj.tags.join(', ')}</p>
+                  <p className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-widest">{proj.tags.join(', ')}</p>
                   <p className="text-white/20 group-hover:text-white/60 text-xs font-bold font-mono italic">[ARCHIVE]</p>
                 </div>
 

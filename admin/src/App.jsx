@@ -12,6 +12,28 @@ const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
 
   useEffect(() => {
+    const verifyToken = async () => {
+      if (token) {
+        try {
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'}/api/admin/verify`, {
+            headers: { token }
+          });
+          const data = await response.json();
+          if (!data.success) {
+            setToken('');
+            localStorage.removeItem('token');
+          }
+        } catch (error) {
+          console.error("Auth_Verification_Error:", error);
+          setToken('');
+          localStorage.removeItem('token');
+        }
+      }
+    };
+    verifyToken();
+  }, [token]);
+
+  useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
     } else {

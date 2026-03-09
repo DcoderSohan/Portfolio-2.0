@@ -23,10 +23,10 @@ const TechStack = ({ id }) => {
                 {/* Section Header */}
                 <div className="mb-24">
                     <div className="flex items-center gap-4 mb-6">
-                        <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.6em] block">
+                        <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-xs uppercase tracking-[0.6em] block">
                             Core_Architecture // 04
                         </span>
-                        <div className="h-[1px] w-20 bg-blue-600/30" />
+                        <div className="h-[1px] w-20 bg-gradient-to-r from-blue-600 to-indigo-900 opacity-30" />
                     </div>
                     <h2 className="text-7xl md:text-8xl font-black tracking-tighter uppercase italic leading-[0.8]">
                         THE <br />
@@ -56,7 +56,7 @@ const TechStack = ({ id }) => {
                             </div>
 
                             <div>
-                                <p className="text-[10px] font-mono text-blue-500 uppercase tracking-[0.4em] mb-2">{tech.category}</p>
+                                <p className="text-[10px] font-mono bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent uppercase tracking-[0.4em] mb-2">{tech.category}</p>
                                 <h3 className="text-3xl font-black uppercase italic tracking-tighter text-white group-hover:text-blue-500 transition-colors">
                                     {tech.name}
                                 </h3>
@@ -69,7 +69,7 @@ const TechStack = ({ id }) => {
                                     whileInView={{ width: tech.level }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 1.5, ease: "circOut", delay: 0.5 }}
-                                    className="h-full bg-gradient-to-r from-blue-600 to-blue-400"
+                                    className="h-full bg-gradient-to-r from-blue-600 to-indigo-900"
                                 />
                             </div>
 

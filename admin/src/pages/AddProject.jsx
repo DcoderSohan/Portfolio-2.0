@@ -51,7 +51,7 @@ const AddProject = () => {
 
             if (data.success) {
                 setStatus('Operation_Successful');
-                setTimeout(() => navigate('/projects'), 800);
+                navigate('/projects', { state: { successMessage: 'Project deployed successfully!' } });
             } else {
                 setStatus('Critical_Failure');
                 alert(data.message);
