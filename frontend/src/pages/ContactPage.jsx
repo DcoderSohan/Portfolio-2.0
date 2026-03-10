@@ -60,7 +60,7 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#050505] text-white py-20 px-6 overflow-hidden relative">
+    <div className="relative min-h-screen bg-[#050505] text-white py-20 px-6 lg:pl-28 overflow-hidden">
 
       {/* 1. BACKGROUND GLOWS */}
       <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />

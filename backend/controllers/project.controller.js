@@ -22,7 +22,11 @@ const uploadToCloudinary = (fileBuffer) => {
 
 export const getProjects = async (req, res) => {
     try {
-        const projects = await Project.find().sort({ createdAt: -1 });
+        const projects = await Project.find()
+            .select("title image liveLink tags createdAt")
+            .sort({ createdAt: -1 })
+            .lean();
+
         res.status(200).json({ success: true, projects });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });

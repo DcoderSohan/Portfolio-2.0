@@ -42,58 +42,65 @@ const WorkPage = () => {
       </header>
 
       {/* 2. PROJECT LIST */}
-      <section className="max-w-7xl mx-auto space-y-64">
+      <section className="max-w-7xl mx-auto flex flex-col gap-16 lg:gap-24">
         {projects.map((project, index) => (
           <motion.div
             key={project._id}
-            initial={{ opacity: 0, y: 100 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+            viewport={{ once: true, margin: "-8%" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative"
           >
-            {/* LARGE INDEX NUMBER */}
-            <span className="absolute -top-20 -left-10 text-[15vw] font-black text-white/5 select-none pointer-events-none group-hover:text-blue-600/10 transition-colors">
-              {String(index + 1).padStart(2, '0')}
-            </span>
-
-            {/* PROJECT IMAGE BOX */}
-            <div className="lg:col-span-7 relative overflow-hidden bg-neutral-900 aspect-video rounded-sm border border-white/5 shadow-2xl">
-              <motion.img
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 1.5 }}
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent opacity-60`} />
+            {/* INDEX NUMBER — top label, always visible */}
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-[clamp(3rem,8vw,7rem)] font-black leading-none text-white/[0.12] group-hover:text-blue-600/25 transition-colors select-none tabular-nums">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div className="flex-1 h-[1px] bg-gradient-to-r from-white/10 to-transparent" />
             </div>
 
-            {/* PROJECT DETAILS */}
-            <div className="lg:col-span-5 space-y-8 relative z-10">
-              <div className="space-y-2">
-                <p className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent font-mono text-xs uppercase tracking-widest">{project.tags.join(' // ')}</p>
-                <h3 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none">{project.title}</h3>
+            {/* CARD BODY */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start bg-white/[0.025] border border-white/[0.06] rounded-2xl p-6 lg:p-10 group-hover:border-blue-600/20 group-hover:bg-white/[0.04] transition-all duration-500">
+
+              {/* PROJECT IMAGE BOX */}
+              <div className="lg:col-span-7 relative overflow-hidden bg-neutral-900 aspect-video rounded-xl border border-white/5 shadow-2xl">
+                <motion.img
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ duration: 1.2 }}
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent opacity-60" />
               </div>
 
-              <p className="text-neutral-400 text-lg font-light leading-relaxed max-w-md">
-                {project.description}
-              </p>
+              {/* PROJECT DETAILS */}
+              <div className="lg:col-span-5 flex flex-col gap-6 relative z-10 justify-center h-full">
+                <div className="space-y-3">
+                  <p className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent font-mono text-[10px] uppercase tracking-widest">{project.tags.join(' // ')}</p>
+                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase leading-[0.9]">{project.title}</h3>
+                </div>
 
-              {/* TECH STACK CHIPS */}
-              <div className="flex flex-wrap gap-3">
-                {project.tags.map(tech => (
-                  <span key={tech} className="px-3 py-1 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-wider text-neutral-500">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+                <p className="text-neutral-400 text-sm lg:text-base font-light leading-relaxed">
+                  {project.description}
+                </p>
 
-              {/* ACTIONS */}
-              <div className="flex gap-6 pt-4">
-                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white font-bold hover:text-blue-500 transition-colors group/link">
-                  View Project <ExternalLink size={18} className="group-hover/link:-translate-y-1 transition-transform" />
-                </a>
+                {/* TECH STACK CHIPS */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map(tech => (
+                    <span key={tech} className="px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-wider text-neutral-400 hover:border-blue-600/40 hover:text-blue-400 transition-colors">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* ACTIONS */}
+                <div className="flex gap-6 pt-2">
+                  <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black text-[11px] font-black uppercase tracking-widest rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 group/link">
+                    View Live <ExternalLink size={14} className="group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -101,7 +108,7 @@ const WorkPage = () => {
       </section>
 
       {/* 3. MODERN CTA FOOTER */}
-      <footer className="mt-64 pb-10 border-t border-white/5 pt-20 relative overflow-hidden">
+      <footer className="mt-32 pb-10 border-t border-white/5 pt-20 relative overflow-hidden">
 
         {/* Subtle Background Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />

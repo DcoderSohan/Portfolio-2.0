@@ -59,7 +59,7 @@ const SymmetricHero = () => {
           {/* Poppins Main Title */}
           <h1 className="text-[13vw] lg:text-[11vw] font-[900] text-white text-center leading-[0.8] tracking-[-0.05em] uppercase relative">
             <span className="text-white">WEB</span><br />
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent stroke-white-low">DEVELOPER</span>
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">DEVELOPER</span>
           </h1>
 
           <div className="mt-12 flex flex-col items-center gap-4">

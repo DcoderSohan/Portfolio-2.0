@@ -56,11 +56,11 @@ const WorkPerspective = () => {
               onClick={() => window.open(proj.liveLink, '_blank')} // Open live link
               className="group relative perspective-1000 cursor-pointer"
             >
-              <div className="relative py-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-center transition-[padding,background-color] duration-700 ease-out group-hover:pl-8 group-hover:bg-white/[0.02]">
+              <div className="relative py-6 border-b border-white/5 flex flex-col md:flex-row justify-between transition-[padding,background-color] duration-700 ease-out group-hover:pl-8 group-hover:bg-white/[0.02]">
 
                 {/* PROJECT NAME */}
                 <div className="relative z-20 overflow-hidden">
-                  <h3 className="text-5xl md:text-[6vw] font-black text-white/30 group-hover:text-white transition-all duration-500 uppercase tracking-tighter group-hover:tracking-normal group-hover:skew-x-[-12deg]">
+                  <h3 className="text-4xl md:text-[4vw] font-black text-white/30 group-hover:text-white transition-all duration-500 uppercase tracking-tighter group-hover:tracking-normal group-hover:skew-x-[-12deg]">
                     {proj.title}
                   </h3>
                 </div>

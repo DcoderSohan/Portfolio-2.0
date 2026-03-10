@@ -42,7 +42,7 @@ const MobileNav = ({ setToken }) => {
       </AnimatePresence>
 
       {/* NAVIGATION CONTAINER */}
-      <div className="absolute bottom-8 left-6 right-6 flex flex-col items-center gap-4">
+      <div className="fixed bottom-8 left-6 right-6 flex flex-col items-center gap-4 pointer-events-none">
 
         {/* EXPANDED MENU: Width fixed via left/right of parent */}
         <AnimatePresence>
@@ -52,7 +52,7 @@ const MobileNav = ({ setToken }) => {
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: 20, opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="w-full max-w-[400px] bg-[#0f0f0f] border border-white/10 rounded-[2.5rem] p-2 shadow-2xl pointer-events-auto overflow-hidden"
+              className="w-full max-w-[400px] bg-[#0f0f0f] border border-white/10 rounded-[2.5rem] p-2 shadow-2xl pointer-events-auto overflow-hidden mb-4"
             >
               {menuItems.map((item) => {
                 const isActive = location.pathname === item.path;
@@ -88,7 +88,6 @@ const MobileNav = ({ setToken }) => {
 
         {/* TRIGGER DOCK */}
         <motion.div
-          layout
           className="pointer-events-auto bg-[#0f0f0f] border border-white/10 rounded-full p-2 flex items-center gap-3 shadow-2xl"
         >
           <div className="pl-4 pr-2 py-2 text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em] border-r border-white/5">

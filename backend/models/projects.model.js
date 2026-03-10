@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+
+
 const projectSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -22,5 +24,7 @@ const projectSchema = new mongoose.Schema({
         required: true
     },
 }, { timestamps: true })
+
+projectSchema.index({ createdAt: -1 });
 
 export default mongoose.model("Project", projectSchema);
