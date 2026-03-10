@@ -85,13 +85,13 @@ const AboutPage = () => {
             <Code2 className="text-neutral-700" />
           </div>
           <div className="space-y-6">
-            <div className="flex justify-between border-b border-white/5 pb-4">
+            {/* <div className="flex justify-between border-b border-white/5 pb-4">
               <div>
                 <p className="text-white font-bold uppercase">MERN Stack Developer</p>
                 <p className="text-neutral-500 text-sm">Freelance</p>
               </div>
               <p className="text-neutral-600 font-mono text-xs">Jul 2024 — PRESENT</p>
-            </div>
+            </div> */}
             <div className="flex justify-between">
               <div>
                 <p className="text-white font-bold uppercase">Web Developer</p>
