@@ -7,30 +7,45 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   // Fetch projects from backend
-  const fetchProjects = async () => {
-    setLoading(true);
+  const fetchProjects = async (retryCount = 0) => {
+    if (retryCount === 0) {
+      setLoading(true);
+      setError(false);
+    }
     try {
       const response = await fetch(`${backendUrl}/api/project/list`);
       const data = await response.json();
-      if (data.success) {
+      if (data.success && Array.isArray(data.projects)) {
         setProjects(data.projects);
+        setLoading(false);
+      } else if (retryCount < 2) {
+        setTimeout(() => fetchProjects(retryCount + 1), 3000);
+      } else {
+        setError(true);
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error fetching projects:", error);
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      console.error("Error fetching projects:", err);
+      if (retryCount < 2) {
+        setTimeout(() => fetchProjects(retryCount + 1), 3000);
+      } else {
+        setError(true);
+        setLoading(false);
+      }
     }
   };
 
+  // Re-fetch every time this page is navigated to (handles back from Add/Edit)
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [location.key]);
 
   // Handlers
   const handleDelete = async (id) => {
@@ -87,6 +102,16 @@ const Projects = () => {
           <div className="py-20 flex flex-col items-center justify-center gap-4 opacity-30">
             <div className="w-12 h-12 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
             <p className="font-mono text-[9px] uppercase tracking-[0.4em]">Synchronizing_Data...</p>
+          </div>
+        ) : error ? (
+          <div className="py-20 flex flex-col items-center justify-center gap-4">
+            <p className="text-white/40 font-mono text-sm">Failed to load projects</p>
+            <button
+              onClick={() => fetchProjects()}
+              className="px-8 py-3 border border-white/20 text-white/60 hover:text-white hover:border-blue-600 rounded-full font-mono text-xs uppercase tracking-widest transition-all duration-300"
+            >
+              Retry
+            </button>
           </div>
         ) : projects.length === 0 ? (
           <div className="py-20 border border-white/5 bg-white/[0.01] rounded-[2.5rem] flex flex-col items-center justify-center gap-4 italic opacity-40">
