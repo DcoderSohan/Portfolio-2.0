@@ -7,20 +7,30 @@ import { backendUrl } from '../config';
 const WorkPage = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  const fetchProjects = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const response = await fetch(`${backendUrl}/api/project/list`);
+      const data = await response.json();
+      if (data.success) {
+        setProjects(data.projects);
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      console.error("Error fetching projects:", err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch(`${backendUrl}/api/project/list`);
-        const data = await response.json();
-        if (data.success) {
-          setProjects(data.projects);
-        }
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
     fetchProjects();
   }, []);
 
@@ -43,7 +53,23 @@ const WorkPage = () => {
 
       {/* 2. PROJECT LIST */}
       <section className="max-w-7xl mx-auto flex flex-col gap-16 lg:gap-24">
-        {projects.map((project, index) => (
+        {loading ? (
+          <div className="py-20 flex flex-col items-center justify-center gap-4 opacity-30">
+            <div className="w-12 h-12 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+            <p className="font-mono text-[9px] uppercase tracking-[0.4em]">Loading_Projects...</p>
+          </div>
+        ) : error ? (
+          <div className="py-20 flex flex-col items-center justify-center gap-4">
+            <p className="text-white/40 font-mono text-sm">Failed to load projects</p>
+            <button
+              onClick={fetchProjects}
+              className="px-6 py-2 border border-white/20 text-white/60 hover:text-white hover:border-blue-600 rounded-full font-mono text-xs uppercase tracking-widest transition-all duration-300"
+            >
+              Retry
+            </button>
+          </div>
+        ) : (
+        projects.map((project, index) => (
           <motion.div
             key={project._id}
             initial={{ opacity: 0, y: 60 }}
@@ -104,7 +130,8 @@ const WorkPage = () => {
               </div>
             </div>
           </motion.div>
-        ))}
+        ))
+        )}
       </section>
 
       {/* 3. MODERN CTA FOOTER */}

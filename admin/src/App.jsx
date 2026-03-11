@@ -7,15 +7,21 @@ import Messages from './pages/Messages';
 import AddProject from './pages/AddProject';
 import EditProject from './pages/EditProject';
 import Login from './pages/Login';
+import { backendUrl } from './config';
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
+
+  // Early ping to wake up the Render backend from cold sleep
+  useEffect(() => {
+    fetch(`${backendUrl}/api/health`).catch(() => {});
+  }, []);
 
   useEffect(() => {
     const verifyToken = async () => {
       if (token) {
         try {
-          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'}/api/admin/verify`, {
+          const response = await fetch(`${backendUrl}/api/admin/verify`, {
             headers: { token }
           });
           const data = await response.json();

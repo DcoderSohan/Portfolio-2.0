@@ -17,35 +17,33 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('token');
 
-        // Fetch Projects (Publicly accessible)
-        const projRes = await fetch(`${backendUrl}/api/project/list`);
-        const projData = await projRes.json();
+        // Fire both requests in parallel — cuts load time in half
+        const [projRes, msgRes] = await Promise.all([
+          fetch(`${backendUrl}/api/project/list`),
+          fetch(`${backendUrl}/api/message/list`, { headers: { token } })
+        ]);
+
+        const [projData, msgData] = await Promise.all([
+          projRes.json(),
+          msgRes.json()
+        ]);
         
         let projectCount = 0;
         if (projData.success && Array.isArray(projData.projects)) {
           projectCount = projData.projects.length;
         }
 
-        // Fetch Messages (Protected)
-        const msgRes = await fetch(`${backendUrl}/api/message/list`, {
-          headers: { token }
-        });
-        const msgData = await msgRes.json();
-        
         let messageCount = 0;
         let unreadCount = 0;
 
         if (msgData.success && Array.isArray(msgData.messages)) {
           messageCount = msgData.messages.length;
-          // Filter by an assumed 'read' property, or show all if not defined
           unreadCount = msgData.messages.filter(m => m.read === false).length;
           
           if (unreadCount === 0 && messageCount > 0 && !msgData.messages[0].hasOwnProperty('read')) {
-            // Fallback for visual impact: if no 'read' property exists, show all as new/active
             unreadCount = messageCount;
           }
         } else if (msgData.message === "Not Authorized, Login Again") {
-          // If auth failed, clear token and logout
           localStorage.removeItem('token');
           window.location.reload();
           return;
