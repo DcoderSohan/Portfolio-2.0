@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
@@ -5,8 +6,14 @@ import WorkPage from './pages/WorkPage';
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import { backendUrl } from './config';
 
 function App() {
+  // Early ping to wake up the Render backend from cold sleep
+  useEffect(() => {
+    fetch(`${backendUrl}/api/health`).catch(() => {});
+  }, []);
+
   return (
     <Router>
       <div className="bg-[#050505] min-h-screen selection:bg-blue-500 selection:text-white">

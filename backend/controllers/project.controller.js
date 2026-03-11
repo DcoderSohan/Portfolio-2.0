@@ -6,7 +6,7 @@ const uploadToCloudinary = (fileBuffer) => {
     return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
             {
-                folder: "projects", // Organizes your images in Cloudinary
+                folder: "projects",
                 resource_type: "auto"
             },
             (error, result) => {
@@ -18,15 +18,38 @@ const uploadToCloudinary = (fileBuffer) => {
     });
 };
 
+// --- In-Memory Cache (5-minute TTL) ---
+let projectCache = null;
+let cacheTimestamp = 0;
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+const invalidateCache = () => {
+    projectCache = null;
+    cacheTimestamp = 0;
+};
+
 // --- Controllers ---
 
 export const getProjects = async (req, res) => {
     try {
+        const now = Date.now();
+
+        // Return cached data if still fresh
+        if (projectCache && (now - cacheTimestamp) < CACHE_TTL) {
+            res.set('Cache-Control', 'public, max-age=300');
+            return res.status(200).json({ success: true, projects: projectCache });
+        }
+
         const projects = await Project.find()
-            .select("title image liveLink tags createdAt")
+            .select("title description image liveLink tags createdAt")
             .sort({ createdAt: -1 })
             .lean();
 
+        // Update cache
+        projectCache = projects;
+        cacheTimestamp = now;
+
+        res.set('Cache-Control', 'public, max-age=300');
         res.status(200).json({ success: true, projects });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -42,7 +65,6 @@ export const createProject = async (req, res) => {
             return res.status(400).json({ success: false, message: "All fields are required" });
         }
 
-        // Upload image using the helper
         const imageUpload = await uploadToCloudinary(imageFile.buffer);
 
         const newProject = new Project({
@@ -54,6 +76,7 @@ export const createProject = async (req, res) => {
         });
 
         await newProject.save();
+        invalidateCache();
         res.status(201).json({ success: true, project: newProject });
     } catch (error) {
         res.status(500).json({ success: false, message: "Upload failed: " + error.message });
@@ -77,6 +100,7 @@ export const updateProject = async (req, res) => {
 
         if (!updatedProject) return res.status(404).json({ success: false, message: "Project not found" });
 
+        invalidateCache();
         res.status(200).json({ success: true, project: updatedProject });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -88,6 +112,7 @@ export const deleteProject = async (req, res) => {
         const deletedProject = await Project.findByIdAndDelete(req.params.id);
         if (!deletedProject) return res.status(404).json({ success: false, message: "Project not found" });
 
+        invalidateCache();
         res.status(200).json({ success: true, message: "Project deleted" });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
